@@ -13,11 +13,11 @@ createApp({
 
     data() {
         return {
-            title: 'hello',
-            itemList: [],
-           
-                        
             
+            itemList: [],
+            sort: '',
+            // itemsTotalAmount: '',
+            // itemsSummaAll: '',
         }
     },
 
@@ -35,22 +35,77 @@ createApp({
             alert(`data: ${counter} ${id}  ${summaPrice}`);
 
         },
+        sortItemsByPriceUp() {
+            
+               
+            
+            this.itemList =  this.itemList.sort((a, b) => a.price - b.price);
+            return this.itemListSorted;
+            
+            
+        },
+        sortItemsByPriceDown() {
+                           
+            
+            this.itemList = this.itemList.sort((a, b) => b.price - a.price);
+            return this.itemListSorted;
+            
+        
+        },
+        sortClean() {
+
+            
+            document.location.reload();
+
+
+        },
+        // getItems() {
+        // let data = localStorage.getItem('data');
+        //         if (data) {
+        //             this.itemList = data;
+                    
+        //         };
+        //     },
         
 
     },
 
     computed: {
+        
         totalAmount() {
-            return this
+            return  this
                     .itemList
                     .reduce((acc, item) => acc + item.amount, 0);
         },
+
         summaAll() {
-            return this
+            return  this
                     .itemList
                     .reduce((acc, item) => acc + item.summa, 0);
-        }
+        },       
+    },
 
+
+    watch: {
+        itemList: {
+            handler() {
+                
+                localStorage.setItem('data', JSON.stringify(this.itemList));
+               
+            },
+            
+
+        },
+        
+    //     // itemsSummaAll: {
+    //         // handler() {
+                
+    //         //     localStorage.setItem('data1', this.itemsSummaAll);
+               
+    //         // },
+            
+// 
+    //     // }
     },
 
     async mounted() {
@@ -62,7 +117,22 @@ createApp({
             console.log(URLitemList);
             this.itemList = URLitemList; 
 
-    }
+            let data = localStorage.getItem('data');
+        //         if (data) {
+        //             this.itemList = data;
+                    
+        //         };
+
+            
+
+            // let data1 = localStorage.getItem('data1');
+            // if (data1) {
+            //     this.itemsSummaAll = data1;
+                
+            // }
+
+
+    },
 
 
 }).mount('#app');
