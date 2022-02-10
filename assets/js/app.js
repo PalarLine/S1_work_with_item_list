@@ -23,6 +23,7 @@ createApp({
 
     methods: {
         onAmountItemsPlus(counter, id, summaPrice ) {
+            
             this.itemList[id].amount = counter;
             this.itemList[id].summa = summaPrice;
             alert(`data: ${counter} ${id} ${summaPrice}`);
@@ -40,7 +41,7 @@ createApp({
                
             
             this.itemList =  this.itemList.sort((a, b) => a.price - b.price);
-            return this.itemListSorted;
+            return this.itemList;
             
             
         },
@@ -48,7 +49,7 @@ createApp({
                            
             
             this.itemList = this.itemList.sort((a, b) => b.price - a.price);
-            return this.itemListSorted;
+            return this.itemList;
             
         
         },

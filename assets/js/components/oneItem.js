@@ -5,12 +5,15 @@ const oneItem = {
         return {
             counter: '',
             summaPrice: '',
+           
         }
     },
     
     mounted() {
         this.counter = this.startValue;
-        this.summaPrice = this.summa;          
+        this.summaPrice = this.summa; 
+        
+
     },
 
     props: ['items', 'startValue', 'elementId', 'price', 'summa',],
@@ -22,6 +25,7 @@ const oneItem = {
             <div class="card-body d-flex flex-column justify-content-between">
                 <h4 class="card-title">{{items.category}}</h4>
                 <h5 class="card-text flex-grow-1">{{items.description}}</h5>
+                
                 <h3 class="card-text text-end">$ {{items.price}}</h3>
             </div>
             <div class="card-footer d-flex justify-content-evenly align-items-stretch ">
