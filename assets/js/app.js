@@ -16,6 +16,7 @@ createApp({
             
             itemList: [],
             sort: '',
+            sortItemList: [],
             // itemsTotalAmount: '',
             // itemsSummaAll: '',
         }
@@ -36,27 +37,29 @@ createApp({
             alert(`data: ${counter} ${id}  ${summaPrice}`);
 
         },
-        sortItemsByPriceUp() {
-            
-               
-            
-            this.itemList =  this.itemList.sort((a, b) => a.price - b.price);
-            return this.itemList;
-            
+
+        sortPriceUp(a, b) {
+
+           return  a.price - b.price;
+
+            //   this.sortItemList = sortList;
+
+                        
             
         },
-        sortItemsByPriceDown() {
-                           
+        sortPriceDown(a, b) {
+             
             
-            this.itemList = this.itemList.sort((a, b) => b.price - a.price);
-            return this.itemList;
+            
+            return  b.price - a.price;
+            
             
         
         },
         sortClean() {
 
             
-            document.location.reload();
+            return this.itemList;
 
 
         },
@@ -83,20 +86,34 @@ createApp({
             return  this
                     .itemList
                     .reduce((acc, item) => acc + item.summa, 0);
-        },       
+        },   
+        sortedList() {
+            switch(this.sort) {
+                case 'option1' : return this.itemList.sort(this.sortPriceUp);
+                case 'option2' : return this.itemList.sort(this.sortPriceDown);
+                case 'option3' : return this.itemList;
+            }
+        }
+        // sortUp() {
+        //     return this.onSortItemsByPriceUp(this.itemList);
+        // },
+
+        // sortDown() {
+        //     return this.onSortItemsByPriceDown(this.itemList);
+        // }
     },
 
 
-    watch: {
-        itemList: {
-            handler() {
+    // watch: {
+    //     itemList: {
+    //         handler() {
                 
-                localStorage.setItem('data', JSON.stringify(this.itemList));
+    //             localStorage.setItem('data', JSON.stringify(this.itemList));
                
-            },
+    //         },
             
 
-        },
+    //     },
         
     //     // itemsSummaAll: {
     //         // handler() {
@@ -107,7 +124,7 @@ createApp({
             
 // 
     //     // }
-    },
+    // },
 
     async mounted() {
         let URLitemList = await fetch(URL);
@@ -118,7 +135,7 @@ createApp({
             console.log(URLitemList);
             this.itemList = URLitemList; 
 
-            let data = localStorage.getItem('data');
+            // let data = localStorage.getItem('data');
         //         if (data) {
         //             this.itemList = data;
                     
