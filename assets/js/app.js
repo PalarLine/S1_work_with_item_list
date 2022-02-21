@@ -15,8 +15,8 @@ createApp({
         return {
             
             itemList: [],
-            sort: '',
-            sortItemList: [],
+            sort: null,
+            // sortItemList: [],
             // itemsTotalAmount: '',
             // itemsSummaAll: '',
         }
@@ -27,22 +27,20 @@ createApp({
             
             this.itemList[id].amount = counter;
             this.itemList[id].summa = summaPrice;
-            alert(`data: ${counter} ${id} ${summaPrice}`);
+            // alert(`data: ${counter} ${id} ${summaPrice}`);
             
 
         },
         onAmountItemsMinus(counter, id, summaPrice) {
             this.itemList[id].amount = counter;
             this.itemList[id].summa = summaPrice;
-            alert(`data: ${counter} ${id}  ${summaPrice}`);
+            // alert(`data: ${counter} ${id}  ${summaPrice}`);
 
         },
 
         sortPriceUp(a, b) {
 
            return  a.price - b.price;
-
-            //   this.sortItemList = sortList;
 
                         
             
@@ -56,22 +54,15 @@ createApp({
             
         
         },
-        sortClean() {
+        // sortClean() {
+
+        //     return  this.itemList;
 
             
-            return this.itemList;
+        //     // document.location.reload();
 
 
-        },
-        // getItems() {
-        // let data = localStorage.getItem('data');
-        //         if (data) {
-        //             this.itemList = data;
-                    
-        //         };
-        //     },
-        
-
+        // },
     },
 
     computed: {
@@ -88,69 +79,36 @@ createApp({
                     .reduce((acc, item) => acc + item.summa, 0);
         },   
         sortedList() {
+            let sorted = this.itemList.map(item => ({...item}))
+            
             switch(this.sort) {
-                case 'option1' : return this.itemList.sort(this.sortPriceUp);
-                case 'option2' : return this.itemList.sort(this.sortPriceDown);
-                case 'option3' : return this.itemList;
+
+                case 'up' :  sorted.sort(this.sortPriceUp);
+                break;
+                
+                case 'down' :  sorted.sort(this.sortPriceDown);
+                break;
+                
+                // case 'clean' :  this.itemList ;
+                // break;
+                
+                // case null : return this.itemList;
             }
-        }
-        // sortUp() {
-        //     return this.onSortItemsByPriceUp(this.itemList);
-        // },
-
-        // sortDown() {
-        //     return this.onSortItemsByPriceDown(this.itemList);
-        // }
+            return this.itemList = sorted.map(item => ({...item}));
+           
+        },
     },
-
-
-    // watch: {
-    //     itemList: {
-    //         handler() {
-                
-    //             localStorage.setItem('data', JSON.stringify(this.itemList));
-               
-    //         },
-            
-
-    //     },
-        
-    //     // itemsSummaAll: {
-    //         // handler() {
-                
-    //         //     localStorage.setItem('data1', this.itemsSummaAll);
-               
-    //         // },
-            
-// 
-    //     // }
-    // },
-
+       
     async mounted() {
         let URLitemList = await fetch(URL);
             URLitemList = await URLitemList.json();
 
            
             URLitemList = URLitemList.map(item => ({...item, amount: 0, summa: 0}));
-            console.log(URLitemList);
+            console.log(URLitemList);            
             this.itemList = URLitemList; 
 
-            // let data = localStorage.getItem('data');
-        //         if (data) {
-        //             this.itemList = data;
-                    
-        //         };
-
-            
-
-            // let data1 = localStorage.getItem('data1');
-            // if (data1) {
-            //     this.itemsSummaAll = data1;
-                
-            // }
-
-
-    },
+   },
 
 
 }).mount('#app');

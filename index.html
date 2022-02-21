@@ -23,8 +23,8 @@
                 class="form-check-label" >
                 <input 
                 v-model="sort"                                
-                @click="sortPriceUp"
-                class="form-check-input" type="radio"    name="inlineRadioOptions" value="option1">
+                @click="sort='up'"
+                class="form-check-input" type="radio" name="inlineRadioOptions" value="up" >
                 Sort by price  Up</label>
             </div>
         
@@ -33,21 +33,21 @@
                 class="form-check-label">
                 <input 
                 v-model="sort"                               
-                @click="sortPriceDown"                   
-                class="form-check-input" type="radio"   name="inlineRadioOptions" value="option2">
+                @click="sort='down'"                   
+                class="form-check-input" type="radio"   name="inlineRadioOptions" value="down" >
                 Sort by  price Down</label>
             </div>
 
-            <div class="form-check form-check-inline">
+            <!-- <div class="form-check form-check-inline">
                 <label                 
                 class="form-check-label">
                 <input 
                 v-model="sort" 
                               
-                @click="sortClean"                   
-                class="form-check-input" type="radio"   name="inlineRadioOptions" value="option3">
+                @click="sort='clear'"                   
+                class="form-check-input" type="radio"   name="inlineRadioOptions" value="clean" >
                 Clean</label>
-            </div>
+            </div> -->
         </div>  
         <div class="row row-cols-4 mt-3" >
             <one-item
