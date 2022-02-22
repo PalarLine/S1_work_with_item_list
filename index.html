@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>STORE</title>
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -19,39 +19,47 @@
         </div>
         <div class="d-flex justify-content-end mt-3">
             <div class="form-check form-check-inline">
-                <label 
-                class="form-check-label" >
-                <input 
-                v-model="sort"                                
-                @click="sort='up'"
-                class="form-check-input" type="radio" name="inlineRadioOptions" value="up" >
-                Sort by price  Up</label>
-            </div>
-        
+                <label class="form-check-label">
+                    <input 
+                        v-model="sort"                                
+                        @click="sort='up'"
+                        class="form-check-input" type="radio"
+                        name="inlineRadioOptions"
+                        value="up"
+                    >
+                    Sort by price  Up
+                </label>
+            </div>        
             <div class="form-check form-check-inline">
-                <label                 
-                class="form-check-label">
-                <input 
-                v-model="sort"                               
-                @click="sort='down'"                   
-                class="form-check-input" type="radio"   name="inlineRadioOptions" value="down" >
-                Sort by  price Down</label>
+                <label class="form-check-label">
+                    <input 
+                        v-model="sort"                               
+                        @click="sort='down'"                   
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        value="down"
+                    >
+                    Sort by  price Down
+                </label>
             </div>
-
-            <!-- <div class="form-check form-check-inline">
-                <label                 
-                class="form-check-label">
-                <input 
-                v-model="sort" 
-                              
-                @click="sort='clear'"                   
-                class="form-check-input" type="radio"   name="inlineRadioOptions" value="clean" >
-                Clean</label>
-            </div> -->
+            <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                    <input 
+                        v-model="sort"                               
+                        @click="sort='clear'"                   
+                        class="form-check-input"
+                        type="radio" 
+                        name="inlineRadioOptions"
+                        value="clean"
+                    >
+                    Clean
+                </label>
+            </div>
         </div>  
         <div class="row row-cols-4 mt-3" >
             <one-item
-                @amount-items-plus='onAmountItemsPlus'
+                @amount-items-plus='amountItemsPlus'
                 v-for="(item, id) in sortedList"
                 :key='item.id'
                 :items="item"
@@ -60,7 +68,7 @@
                 :price="item.price"
                 :summa="item.summa"        
 
-                @amount-items-minus='onAmountItemsMinus'
+                @amount-items-minus='amountItemsMinus'
                 v-for="(item, id) in sortedList"
                 :key="item.id"
                 :items="item"
@@ -68,8 +76,7 @@
                 :element-id="id"
                 :price="item.price"
                 :summa="item.summa"          
-            >
-            
+            >            
             </one-item>
         </div>
         

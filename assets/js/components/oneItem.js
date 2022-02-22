@@ -12,8 +12,6 @@ const oneItem = {
     mounted() {
         this.counter = this.startValue;
         this.summaPrice = this.summa; 
-        
-
     },
 
     props: ['items', 'startValue', 'elementId', 'price', 'summa',],
@@ -47,7 +45,6 @@ const oneItem = {
                         $emit('amount-items-plus', counter, elementId, summaPrice );">
                     </i>
                 </div>
-
             </div>            
     </div>
     </div>

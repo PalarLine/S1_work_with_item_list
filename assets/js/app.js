@@ -8,108 +8,63 @@ createApp({
 
     components: {
         oneItem,
-
     },
 
     data() {
-        return {
-            
+        return {            
             itemList: [],
             sort: null,
-            // sortItemList: [],
-            // itemsTotalAmount: '',
-            // itemsSummaAll: '',
+            sortItemList: [],
         }
     },
 
     methods: {
-        onAmountItemsPlus(counter, id, summaPrice ) {
-            
-            this.itemList[id].amount = counter;
-            this.itemList[id].summa = summaPrice;
-            // alert(`data: ${counter} ${id} ${summaPrice}`);
-            
-
+        amountItemsPlus(counter, id, summaPrice ) {
+            this.sortItemList[id].amount = counter;
+            this.sortItemList[id].summa = summaPrice;              
         },
-        onAmountItemsMinus(counter, id, summaPrice) {
-            this.itemList[id].amount = counter;
-            this.itemList[id].summa = summaPrice;
-            // alert(`data: ${counter} ${id}  ${summaPrice}`);
-
+        amountItemsMinus(counter, id, summaPrice) {
+            this.sortItemList[id].amount = counter;
+            this.sortItemList[id].summa = summaPrice;    
         },
-
         sortPriceUp(a, b) {
-
-           return  a.price - b.price;
-
-                        
-            
+           return  a.price - b.price;                       
         },
-        sortPriceDown(a, b) {
-             
-            
-            
-            return  b.price - a.price;
-            
-            
-        
+        sortPriceDown(a, b) {         
+            return  b.price - a.price;           
         },
-        // sortClean() {
-
-        //     return  this.itemList;
-
-            
-        //     // document.location.reload();
-
-
-        // },
     },
-
-    computed: {
-        
+    
+    computed: {        
         totalAmount() {
             return  this
-                    .itemList
+                    .sortItemList
                     .reduce((acc, item) => acc + item.amount, 0);
         },
-
         summaAll() {
             return  this
-                    .itemList
+                    .sortItemList
                     .reduce((acc, item) => acc + item.summa, 0);
-        },   
+        },  
         sortedList() {
-            let sorted = this.itemList.map(item => ({...item}))
-            
-            switch(this.sort) {
-
-                case 'up' :  sorted.sort(this.sortPriceUp);
-                break;
-                
-                case 'down' :  sorted.sort(this.sortPriceDown);
-                break;
-                
-                // case 'clean' :  this.itemList ;
-                // break;
-                
-                // case null : return this.itemList;
+            let sorted = [...this.itemList];
+            if (this.sort == 'up') {
+                return  this.sortItemList = sorted.sort(this.sortPriceUp)
+            } else if (this.sort == 'down') {
+                return  this.sortItemList = sorted.sort(this.sortPriceDown)    
+            } else {
+                return  this.sortItemList = sorted;
             }
-            return this.itemList = sorted.map(item => ({...item}));
-           
-        },
+        },        
     },
-       
+           
     async mounted() {
         let URLitemList = await fetch(URL);
-            URLitemList = await URLitemList.json();
-
-           
+            URLitemList = await URLitemList.json();           
             URLitemList = URLitemList.map(item => ({...item, amount: 0, summa: 0}));
             console.log(URLitemList);            
             this.itemList = URLitemList; 
-
    },
-
 
 }).mount('#app');
 
